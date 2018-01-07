@@ -1,0 +1,47 @@
+# add libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import cross_validate
+
+# import the data using pandas read_csv
+white = pd.read_csv('winequality-white.csv',sep=';',quotechar='"')
+red = pd.read_csv('winequality-red.csv',sep=';',quotechar='"')
+
+# create dataframe for the chemical characteristics, which I'll label 'x'
+# convert the dataframe into a matrix
+x_df = white.iloc[:,:-1]
+x = x_df.as_matrix()
+
+# create dataframe for the wine quality, which I'll label 'y'
+# convert the dataframe into a numpy array, for sklearn to use
+y_df = white["quality"].values
+y = np.array([1 if i>=7 else 0 for i in y_df])
+
+# set aside an empty list in which to keep the importances scores
+scores = []
+
+# create Random Forest Classifier model from sklean.ensemble
+# fit the model to your x and y data
+clf = RandomForestClassifier(n_estimators=11)
+clf.fit(x,y)
+# after cross-validating the model 10 times using cross_val_score
+# append the classification scores to the scores list
+scores.append(cross_val_score(clf, x, y, cv=10))
+# print the classification scores to see how well Random Forest performed
+print(cross_validate(clf,x,y,cv=10))
+# looking at the train scores vs the test scores, it seems we achieved
+# between 76.2% and 85.5% accuracy in the test, whereas training scores
+# were a lot higher, between 99.2% to 99.7%.
+
+# now, let's compute the feature importances from the model
+imp = clf.feature_importances_
+names = x_df.columns
+
+# plot the RF variable importances in a horizontal bar chart
+imp, names = zip(*sorted(zip(imp,names)))
+plt.barh(range(len(names)), imp, align = 'center')
+plt.yticks(range(len(names)), names)
+
