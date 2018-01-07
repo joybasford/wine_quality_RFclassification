@@ -12,9 +12,9 @@ Since Decision Trees are deterministic, using an ensemble permits a probablistic
 It also permits us to compute how 'important' each of the wine chemical features was to the quality.
 
 # Python Libraries
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.cross_validation import cross_val_score
-from sklearn.model_selection import cross_validate
+-import numpy as np
+-import pandas as pd
+-import matplotlib.pyplot as plt
+-from sklearn.ensemble import RandomForestClassifier
+-from sklearn.cross_validation import cross_val_score
+-from sklearn.model_selection import cross_validate
