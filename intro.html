@@ -1,0 +1,49 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Wine Quality Prediction using Random Forest Classification\n",
+    "##### By Joy Basford\n",
+    "\n",
+    "Here is a small project to predict wine quality using the Random Forest Classification method. Random Forest is an ensemble of Decision Trees, which perform classification based on rules at each "leaf". Since Decision Trees are deterministic, using an ensemble permits a probablistic approach and permits us to compute how 'important' each of the wine chemical features was to the quality."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 120,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt\n",
+    "from sklearn.ensemble import RandomForestClassifier\n",
+    "from sklearn.cross_validation import cross_val_score\n",
+    "from sklearn.model_selection import cross_validate"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---\n",
+    "\n",
+    "First, let's get the data\n",
+    "The dataset can be found on https://archive.ics.uci.edu/ml/datasets/wine+quality."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 121,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "# import the data using pandas read_csv
+white = pd.read_csv('winequality-white.csv',sep=';',quotechar='"')
+red = pd.read_csv('winequality-red.csv',sep=';',quotechar='"')"
+   ]
+  },
